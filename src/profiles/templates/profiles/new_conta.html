@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Meu Perfil</title>
+<script type="text/javascript" src="{% static 'profiles/profiles_my.js'%}"></script>
+<link rel="stylesheet" href="{% static 'profiles/profiles_my.css' %}">
+{% endblock %}
+
+{% block body %}
+<!-- HEADER -->
+<header class="sticky-lg-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+
+      <h1 class="navbar-brand fw-bold d-none d-sm-block" id="title">
+        <a href="{% url 'mainpage:index'%}">Markdown Post</a>
+      </h1>
+
+      <button class="navbar-toggler collapsed" id="expandNavbar" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbar-options" aria-controls="navbar-options" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <img src="{% static 'profiles/assets/arrow-bar-down.svg' %}" alt="Expand">
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbar-options">
+        <ul class="navbar-nav text-end">
+          <li class="nav-item">
+            <a href="{% url 'profiles:my-profile-view' %}" class="nav-link">HOME</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link">RANDOM PAGE</a>
+          </li> -->
+          <li class="nav-item">
+            <a href="{% url 'account_logout' %}"><button class="btn mt-lg-auto mt-2" id="btn-logout">LOGOUT</button></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <div class="container">
+    <div class="row">
+      
+      <section id="posts" class="col balacobaco">
+        <h2 class="text-center">Nova conta</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome da Conta:</label>
+                <input type="text" name="nome" class="form-control" id="nome" >
+            </div>
+
+            <div class="input-group mb-3">
+              <label class="input-group-text">Instituições</label>
+              <select class="form-select" name="instituicao" id="Instituições">
+                <option selected>Nenhuma</option>
+                <option value="Bradesco">Bradesco</option>
+                <option value="Banco do Brasil">Banco do Brasil</option>
+                <option value="Itaú">Itaú</option>
+                <option value="Picpay">Picpay</option>
+                <option value="Next">Next</option>
+                <option value="Nubank">Nubank</option>
+                <option value="Santander">Santander</option>
+                <option value="Caixa">Caixa</option>
+                <option value="Banrisul">Banrisul</option>
+                <option value="Inter">Inter</option>
+                <option value="HSBC">HSBC</option>
+              </select>
+            </div>
+
+            <label class="form-label">Saldo:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">$</span>
+              <input type="text" class="form-control" name="saldo" aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">.00</span>
+            </div>
+
+            <div class="input-group mb-3">
+                <label class="input-group-text">Tipo da Conta: </label>
+                <select class="form-select" name="tipo" id="Instituições">
+                  <option selected>Nenhuma</option>
+                  <option value="Carteira">Carteira</option>
+                  <option value="Corrente">Conta Corrente</option>
+                  <option value="Poupança">Poupança</option>
+                  <option value="Outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+        
+
+      </section>
+
+      
+
+    </div>
+  </div>
+
+  
+
+</main>
+
+<!-- FOOTER -->
+<footer class="mt-auto">
+  <div class="container">
+    <div class="row">
+
+      <div class="col">
+        <h4>&copy; <script>document.write(new Date().getFullYear())</script> All Rights Reserved</h4>
+      </div>
+      <div class="col">
+        <a href="https://github.com/nicolasfvz/PI2021-MarkdownPost" target="_blank">
+          <img class="float-end" src="{% static 'profiles/assets/github.svg' %}" alt="GitHub">
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+{% endblock %}

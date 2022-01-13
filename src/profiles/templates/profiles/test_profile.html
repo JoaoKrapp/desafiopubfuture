@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Test profile</title>
+<script>
+    console.log('{{testando}}')
+</script>
+{% endblock %}
+
+{% block body %}
+<p><b>Meu perfil: </b>{{profile}}</p>
+<p><b>Minhas Contas: </b>{{profile.get_contas}}</p>
+<p><b>Minhas Contas: </b>{{profile.get_contas_list.get_receitas}}</p>
+{% endblock %}

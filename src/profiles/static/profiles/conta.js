@@ -17,7 +17,7 @@
      */
     $.ajax({
         type: 'GET',
-        url: `/profiles/my-receitas-json/${contaJS.innerHTML}`,
+        url: `/profiles/receitas-json/${contaJS.innerHTML}`,
         success: function(response){
 
             //console.log(response)

@@ -3,14 +3,12 @@
 
 {% block head %}
 <title>Meu Perfil</title>
-<script type="text/javascript" src="{% static 'profiles/conta.js'%}"></script>
+<script type="text/javascript" src="{% static 'profiles/profiles_my.js'%}"></script>
 <link rel="stylesheet" href="{% static 'profiles/profiles_my.css' %}">
 {% endblock %}
 
 {% block body %}
 <!-- HEADER -->
-<div id="contaJS"  style="display: none;">{{conta}}</div>
-
 <header class="sticky-lg-top">
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -34,9 +32,6 @@
             <a href="#" class="nav-link">RANDOM PAGE</a>
           </li> -->
           <li class="nav-item">
-            <a href="{% url 'profiles:new-receita' conta %}" class="nav-link">NOVA RECEITA</a>
-          </li>
-          <li class="nav-item">
             <a href="{% url 'account_logout' %}"><button class="btn mt-lg-auto mt-2" id="btn-logout">LOGOUT</button></a>
           </li>
         </ul>
@@ -53,29 +48,38 @@
     <div class="row">
       
       <section id="posts" class="col balacobaco">
-        <h2 class="text-center">Receitas</h2>
+        <h2 class="text-center">Nova Receita:</h2>
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Descrição</th>
-              <th scope="col">Valor</th>
-              <th scope="col">Criado</th>
-              <th scope="col">Data Pagamento</th>
-              <th scope="col">Data de Pagamento Esperado</th>
-            </tr>
-          </thead>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                <input type="text" name="descricao" class="form-control" id="nome" >
+            </div>
 
-          <tbody id="receitasItems">
-            
-            <!-- Aqui vai as contas-->
-            
-          </tbody>
-        </table>
+            <label class="form-label">Valor:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">R$</span>
+              <input type="text" class="form-control" name="saldo" aria-label="">
+              <span class="input-group-text">.00</span>
+            </div>
 
-        <div id="postsItems" class="d-flex flex-column">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Data De Pagamento ( DD/MM/AA ) : </label>
+                <input type="text" name="dataPagamento" class="form-control" id="nome" >
+            </div>
 
-        </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Data De Pagamento Esperadoo ( DD/MM/AA ): </label>
+                <input type="text" name="dataPagamentoEsperado" class="form-control" id="nome" >
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+        
+
       </section>
 
       

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     $.ajax({
         type: 'GET',
-        url: '/profiles/my-contas-json/',
+        url: '/profiles/contas-json',
         success: function(response){
 
             console.log(response)
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feed.forEach(element => {
                 postBody.innerHTML += `
                 <tr>
-                  <td><a href="conta/${element.nome}">${element.nome}</a></td>
+                  <td><a href="/profiles/conta/${element.nome}">${element.nome}</a></td>
                   <td>${element.instituicao}</td>
                   <td>${element.tipo}</td>
                   <td>R$${element.saldo}</td>

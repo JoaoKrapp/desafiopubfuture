@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
-from .models import Conta, Profile
+from .models import Conta, Profile, Receita
 from django.views.generic import TemplateView, View
 from django.http import JsonResponse, request, response, HttpResponseRedirect
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
+import datetime
 
 # Create your views here.
 # TODO 
@@ -22,19 +23,54 @@ def profile_Test_view(request):
 
 def MyProfileView(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('profiles:index'))
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
     else:
         return render(request, 'profiles/my_profile.html')
     
 def ExpecificContaView(request, conta):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('profiles:index'))
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
     else:
         return render(request, 'profiles/conta.html', {"conta":conta})
     
+    #descrição saldo dataPagamento dataPagamentoEsperado
+    
+def NewReceitaView(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        if request.method == 'POST':
+            descricao = request.POST["descricao"]
+            saldo = request.POST["saldo"]
+            dataPagamento = request.POST["dataPagamento"]
+            dataPagamentoEsperado = request.POST["dataPagamentoEsperado"]
+            
+            ano = dataPagamento[6:]
+            mes = dataPagamento[3:5]
+            dia = dataPagamento[:2]
+            
+            dataPagamento = datetime.date(int(ano), int(mes), int(dia))
+            
+            ano = dataPagamentoEsperado[6:]
+            mes = dataPagamentoEsperado[3:5]
+            dia = dataPagamentoEsperado[:2]
+            
+            dataPagamentoEsperado = datetime.date(int(ano), int(mes), int(dia))
+            
+            conta = Conta.objects.filter(autor=request.user.perfil, nome=conta).first()
+            
+            new_receita = Receita(valor=saldo, autor=conta, descricao=descricao, dataPagamento=dataPagamento, dataPagamentoEsperado=dataPagamentoEsperado)
+            new_receita.save()
+            
+            conta.saldo += int(saldo)
+            conta.save()
+            
+            return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+        return render(request, 'profiles/new_receita.html', {"conta":conta})
+    
 def CriarContaView(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('profiles:index'))
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
     else:
         if request.method == 'POST':
             nome = request.POST["nome"]
@@ -53,7 +89,7 @@ def CriarContaView(request):
     
 def MyReceitasData(request, conta):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('profiles:index'))
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
     else:
         profile = Profile.objects.get(user=request.user)
         conta = Conta.objects.filter(nome=conta,autor=profile).first()

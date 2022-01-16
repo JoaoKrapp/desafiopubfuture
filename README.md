@@ -2,8 +2,8 @@
 
 Opa! Esse aqui é o repositório para o Programa de Formação da Proway em conjunto com a Pública Tecnologia, este projeto foi feito em Python(Django), JavaScript(AJAX), HTML, CSS, e Bootstrap. Sendo necessário baixar somente o Python e PIP para a utilização do código. 
 ###
-- [x] #739 Só lembrando que quando cadastrar alguma coisa deverá seguir as instruções seguidas, se não o programa irá dar erro e não fazer as operações necessárias.
-- [x] #739 Ps: Um amigo tentou rodar um programa e deu um *erro* na criação da receita, e só deu erro na maquina dele outras pessoas rodaram o programa e deu tudo certo, mas não faço ideia como concertar :(
+-  Só lembrando que quando cadastrar alguma coisa deverá seguir as instruções seguidas, se não o programa irá dar erro e não fazer as operações necessárias.
+-  Um amigo tentou rodar um programa e deu um *erro* na criação da receita, e só deu erro na maquina dele outras pessoas rodaram o programa e deu tudo certo, mas não faço ideia como concertar :(
 
 ## Rodando o programa:
 Execute:

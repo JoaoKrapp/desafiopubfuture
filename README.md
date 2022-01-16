@@ -27,5 +27,5 @@ O código é formado por 3 diretórios principais: ```mainpage```, ```profiles``
 - ```Templates``` Neste diretório terá todos os HTML da página
 ## Admin
 Por padrão o Django possui o /admin, para editar diretamente o usuário e ver como o banco de dados é feito, além disso depois de logar dentro do /admin tente logar normalmente no site, e já terá algumas contas com receitas para testar o programa.
-### Usuario : ```ADMIN```
-### Senha : ```admin```
+Usuario : ```ADMIN```
+Senha : ```admin```

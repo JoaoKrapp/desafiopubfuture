@@ -23,9 +23,17 @@ O código é formado por 3 diretórios principais: ```mainpage```, ```profiles``
 - ```Apps``` Arquivo de configuração de app, assim são chamados as diferentes partes do projeto, no meu caso existem dois mainpage e profiles
 - ```Signals``` Não é um arquivo base django, toda vez que é criado um User na database um signal é ativado para criar um item na tabela Profile com um OneToOneField de um user.
 - ```Urls``` Neste arquivo terá uma lista de cada URL,sendo um ```Path('url do site', função no arquivo views do mesmo diretório, name='nome')```
-- ```Views``` Aqui terá todas as funções logicas do backend do site
+- ```Views``` Aqui terá todas as funções lógicas do backend do site
 - ```Templates``` Neste diretório terá todos os HTML da página
 ## Admin
 Por padrão o Django possui o /admin, para editar diretamente o usuário e ver como o banco de dados é feito, além disso depois de logar dentro do /admin tente logar normalmente no site, e já terá algumas contas com receitas para testar o programa.
 - Usuario : ```ADMIN```
 - Senha : ```admin```
+## APIs
+Existem 3 APIs que são usadas para colocar os dados na tela utilizando JavaScript são elas:
+- ```http://127.0.0.1:8000/profiles/receitas-json/{Conta}``` : Para pegar as receitas de uma expecifica conta
+- ```http://127.0.0.1:8000/profiles/receitas-json/$%7BcontaJS.innerHTML%7D/filtrar/?dataInicio={dataInicio}&dataFinal={dataFinal}&checkbox={checkbox}&descricao=${descricao}``` : Para aplicar os filtros
+- ```/profiles/contas-json``` : Para pegar as contas do seu perfil
+
+
+

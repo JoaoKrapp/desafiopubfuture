@@ -24,7 +24,7 @@ O código é formado por 3 diretórios principais: ```mainpage```, ```profiles``
 - ```Signals``` Não é um arquivo base django, toda vez que é criado um User na database um signal é ativado para criar um item na tabela Profile com um OneToOneField de um user.
 - ```Urls``` Neste arquivo terá uma lista de cada URL,sendo um ```Path('url do site', função no arquivo views do mesmo diretório, name='nome')```
 - ```Views``` Aqui terá todas as funções logicas do backend do site
-- ```Template``` Neste diretório terá todos os HTML da página
+- ```Templates``` Neste diretório terá todos os HTML da página
 ## Admin
 Por padrão o Django possui o /admin, para editar diretamente o usuário e ver como o banco de dados é feito, além disso depois de logar dentro do /admin tente logar normalmente no site, e já terá algumas contas com receitas para testar o programa.
 #### Usuario : ```ADMIN```

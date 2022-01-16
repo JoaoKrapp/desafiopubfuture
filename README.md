@@ -22,3 +22,4 @@ O código é formado por 3 diretórios principais: mainpage, profiles, e Públic
 - ```Signals``` Não é um arquivo base django, toda vez que é criado um User na database um signal é ativado para criar um item na tabela Profile com um OneToOneField de um user.
 - ```Urls``` Neste arquivo terá uma lista de cada URL,sendo um ```Path('url do site', função no arquivo views do mesmo diretorio, name='nome')```
 - ```Views``` Aqui tera todas as funções logicas do backend do site
+- ```Template``` Neste diretorio tera todos os HTML da página

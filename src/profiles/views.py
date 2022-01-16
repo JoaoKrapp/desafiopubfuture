@@ -78,6 +78,9 @@ def TransferContaView(request, conta):
             new_receita = Receita(valor=valor, autor=conta_receber_dinheiro, descricao=f"Transferencia de {conta_debitar_dinheiro}", dataPagamento=datetime.date.today())
             new_receita.save()
             
+            new_receita = Receita(valor=-(int(valor)), autor=conta_debitar_dinheiro, descricao=f"Transferencia para {conta_receber_dinheiro}", dataPagamento=datetime.date.today())
+            new_receita.save()
+            
             
             return HttpResponseRedirect(reverse('profiles:my-profile-view'))
         return render(request, 'profiles/transfer_conta.html', {"conta":conta})
@@ -123,10 +126,15 @@ def CriarContaView(request):
             if nome == "" or instituicao == "" or tipo == "":
                 return HttpResponseRedirect(reverse('profiles:criar-conta'))
             
-            nova_conta = Conta(nome=nome, instituicao=instituicao, saldo=saldo, tipo=tipo,autor=request.user.perfil)
-            nova_conta.save()
-            return HttpResponseRedirect(reverse('profiles:my-profile-view'))
-        
+            if Conta.objects.filter(nome=nome).first() != None:
+                return HttpResponseRedirect(reverse('profiles:criar-conta'))
+            else:
+                nova_conta = Conta(nome=nome, instituicao=instituicao, saldo=saldo, tipo=tipo,autor=request.user.perfil)
+                nova_conta.save()
+
+                nova_receita = Receita(valor=saldo, autor=nova_conta, descricao=f"Criação de Conta", dataPagamento=datetime.date.today())
+                nova_receita.save()
+                return HttpResponseRedirect(reverse('profiles:my-profile-view'))
         return render(request, 'profiles/new_conta.html')
     
 def EditarContaView(request, conta):

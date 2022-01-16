@@ -17,7 +17,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 ## Analisando o programa:
-O código é formado por 3 diretórios principais: mainpage, profiles, e Pública. O diretório público possui todos os arquivos necessários usador globalmente, como por exemplo o ```url.py``` que possui todas as urls globais. Dentro da mainpage, profile possuem basicamente:
+O código é formado por 3 diretórios principais: ```mainpage```, ```profiles```, e ```Publica```. O diretório público possui todos os arquivos necessários usador globalmente, como por exemplo o ```url.py``` que possui todas as urls globais. Dentro da ```mainpage```, ```profile``` possuem basicamente:
 - ```Models``` Nesse arquivo onde será declarado as tabelas do banco de dados
 - ```Admin``` Nesse arquivo onde será declarado as tabelas que serão mostradas no ```/admin/```
 - ```Apps``` Arquivo de configuração de app, assim são chamados as diferentes partes do projeto, no meu caso existem dois mainpage e profiles

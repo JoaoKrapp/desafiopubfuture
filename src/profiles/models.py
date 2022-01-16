@@ -78,7 +78,6 @@ class Receita(models.Model):
     descricao = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     dataPagamento = models.DateField()
-    dataPagamentoEsperado = models.DateField()
     
     def __str__(self) -> str:
         return self.descricao

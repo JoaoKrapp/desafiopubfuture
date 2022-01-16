@@ -48,25 +48,42 @@
     <div class="row">
       
       <section id="posts" class="col balacobaco">
-        <h2 class="text-center">Nova Receita</h2>
+        <h2 class="text-center">Editar Conta</h2>
 
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Descrição</label>
-                <input type="text" name="descricao" class="form-control" id="nome" >
+                <label for="exampleInputEmail1" class="form-label">Nome da Conta:</label>
+                <input type="text" name="nome" class="form-control" id="nome" >
             </div>
 
-            <label class="form-label">Valor:</label>
             <div class="input-group mb-3">
-              <span class="input-group-text">R$</span>
-              <input type="text" class="form-control" name="saldo" aria-label="">
-              <span class="input-group-text">.00</span>
+              <label class="input-group-text">Instituições</label>
+              <select class="form-select" name="instituicao" id="Instituições">
+                <option selected>Nenhuma</option>
+                <option value="Bradesco">Bradesco</option>
+                <option value="Banco do Brasil">Banco do Brasil</option>
+                <option value="Itaú">Itaú</option>
+                <option value="Picpay">Picpay</option>
+                <option value="Next">Next</option>
+                <option value="Nubank">Nubank</option>
+                <option value="Santander">Santander</option>
+                <option value="Caixa">Caixa</option>
+                <option value="Banrisul">Banrisul</option>
+                <option value="Inter">Inter</option>
+                <option value="HSBC">HSBC</option>
+              </select>
             </div>
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Data De Pagamento ( DD/MM/AA ) : </label>
-                <input type="text" name="dataPagamento" class="form-control" id="nome" >
+            <div class="input-group mb-3">
+                <label class="input-group-text">Tipo da Conta: </label>
+                <select class="form-select" name="tipo" id="Instituições">
+                  <option selected>Nenhuma</option>
+                  <option value="Carteira">Carteira</option>
+                  <option value="Corrente">Conta Corrente</option>
+                  <option value="Poupança">Poupança</option>
+                  <option value="Outro">Outro</option>
+                </select>
             </div>
 
             <div class="d-grid gap-2 col-6 mx-auto">

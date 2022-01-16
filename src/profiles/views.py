@@ -32,8 +32,56 @@ def ExpecificContaView(request, conta):
         return HttpResponseRedirect(reverse('profiles:my-profile-view'))
     else:
         return render(request, 'profiles/conta.html', {"conta":conta})
+
+def FiltroContaView(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        if request.method == 'POST':
+            inicial = request.POST['Inicial']
+            final = request.POST['Final']
+            checkbox = request.POST.get('checkbox', False)
+            filtro = request.POST['filtro']
+            return HttpResponseRedirect(reverse('profiles:filtro-conta-pagina', kwargs={'conta': conta})+f'?dataInicio={inicial}&dataFinal={final}&checkbox={checkbox}&descricao={filtro}')
+        return render(request, 'profiles/filtro.html', {"conta":conta})
     
-    #descrição saldo dataPagamento dataPagamentoEsperado
+def FiltroReceitaView(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        inicial = request.GET.get('dataInicio', '')
+        final = request.GET.get('dataFinal', '')
+        checkbox = request.GET.get('checkbox', '')
+        filtro = request.GET.get('descricao', '')
+        return render(request, 'profiles/filtro_receitas_pagina.html', {"conta":conta, "dataInicio": inicial, "dataFinal": final, "checkbox":checkbox, "descricao":filtro})
+    
+def TransferContaView(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        if request.method == 'POST':
+            nome = request.POST["nome"]
+            valor = request.POST["valor"]
+            
+            if nome == conta or int(valor) <= 0:
+                return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+            
+            conta_receber_dinheiro = Conta.objects.filter(nome=nome, autor=request.user.perfil).first()
+            conta_debitar_dinheiro = Conta.objects.filter(nome=conta, autor=request.user.perfil).first()
+            
+            conta_debitar_dinheiro.saldo -= int(valor)
+            conta_debitar_dinheiro.save()
+            
+            conta_receber_dinheiro.saldo += int(valor)
+            conta_receber_dinheiro.save()
+            
+            new_receita = Receita(valor=valor, autor=conta_receber_dinheiro, descricao=f"Transferencia de {conta_debitar_dinheiro}", dataPagamento=datetime.date.today())
+            new_receita.save()
+            
+            
+            return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+        return render(request, 'profiles/transfer_conta.html', {"conta":conta})
+    
     
 def NewReceitaView(request, conta):
     if not request.user.is_authenticated:
@@ -43,7 +91,6 @@ def NewReceitaView(request, conta):
             descricao = request.POST["descricao"]
             saldo = request.POST["saldo"]
             dataPagamento = request.POST["dataPagamento"]
-            dataPagamentoEsperado = request.POST["dataPagamentoEsperado"]
             
             ano = dataPagamento[6:]
             mes = dataPagamento[3:5]
@@ -51,15 +98,10 @@ def NewReceitaView(request, conta):
             
             dataPagamento = datetime.date(int(ano), int(mes), int(dia))
             
-            ano = dataPagamentoEsperado[6:]
-            mes = dataPagamentoEsperado[3:5]
-            dia = dataPagamentoEsperado[:2]
-            
-            dataPagamentoEsperado = datetime.date(int(ano), int(mes), int(dia))
             
             conta = Conta.objects.filter(autor=request.user.perfil, nome=conta).first()
             
-            new_receita = Receita(valor=saldo, autor=conta, descricao=descricao, dataPagamento=dataPagamento, dataPagamentoEsperado=dataPagamentoEsperado)
+            new_receita = Receita(valor=saldo, autor=conta, descricao=descricao, dataPagamento=dataPagamento)
             new_receita.save()
             
             conta.saldo += int(saldo)
@@ -87,6 +129,26 @@ def CriarContaView(request):
         
         return render(request, 'profiles/new_conta.html')
     
+def EditarContaView(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        if request.method == "POST":
+            nome = request.POST["nome"]
+            instituicao = request.POST["instituicao"]
+            tipo = request.POST["tipo"]
+            
+            conta_editar = Conta.objects.filter(nome=conta,autor=request.user.perfil).first()
+            
+            conta_editar.nome = nome
+            conta_editar.instituicao = instituicao
+            conta_editar.tipo = tipo
+            conta_editar.save()
+            
+            
+            return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+        return render(request, 'profiles/edit_conta.html', {"conta":conta})
+    
 def MyReceitasData(request, conta):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('profiles:my-profile-view'))
@@ -109,12 +171,53 @@ def MyReceitasData(request, conta):
                 receitadict["valor"] = receita.valor
                 receitadict["criado"] = receita.created
                 receitadict["dataPagamento"] = receita.dataPagamento
-                receitadict["dataPagamentoEsperado"] = receita.dataPagamentoEsperado
                 lista.append(receitadict)
                 
             
             return JsonResponse({"conta" : contadata, 
                                  "receitas" : lista})
+
+def MyFiltroReceitasData(request, conta):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profiles:my-profile-view'))
+    else:
+        dataInicioGet = request.GET.get('dataInicio', '')
+        dataFinalGet = request.GET.get('dataFinal', '')
+        checkboxGet = request.GET.get('checkbox', '')
+        descricaoGet = request.GET.get('descricao', '')
+        
+        profile = Profile.objects.get(user=request.user)
+        conta_pedinte = Conta.objects.filter(autor=profile, nome=conta).first()
+        
+        ano = dataInicioGet[6:]
+        mes = dataInicioGet[3:5]
+        dia = dataInicioGet[:2]
+        
+        dataInicioGetFormatado = datetime.date(int(ano), int(mes), int(dia))
+        
+        print(dataInicioGetFormatado)
+        
+        ano = dataFinalGet[6:]
+        mes = dataFinalGet[3:5]
+        dia = dataFinalGet[:2]
+        
+        dataFinalGetFormatado = datetime.date(int(ano), int(mes), int(dia))
+
+        if checkboxGet == "True":
+            qs = Receita.objects.filter(autor=conta_pedinte,descricao=descricaoGet, dataPagamento__range=(dataInicioGetFormatado,dataFinalGetFormatado))
+        else:
+            qs = Receita.objects.filter(autor=conta_pedinte, dataPagamento__range=(dataInicioGetFormatado,dataFinalGetFormatado))
+        
+        lista = []
+        for i in qs:
+            receitasdict = {}
+            receitasdict["descricao"] = i.descricao
+            receitasdict["valor"] = i.valor
+            receitasdict["criado"] = i.created
+            receitasdict["dataPagamento"] = i.dataPagamento
+            lista.append(receitasdict)
+            
+        return JsonResponse({"data" : lista})
 
 
 class MainPageView(TemplateView):

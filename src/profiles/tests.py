@@ -1,5 +1,6 @@
-#from django.test import TestCase
-#import markdown
-# 7, 11
-# Create your tests here.
- 
+import datetime
+
+a = datetime.date(2004, 5, 24)
+b = datetime.date(2004, 5, 24)
+
+print(a >= b)

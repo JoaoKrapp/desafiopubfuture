@@ -3,12 +3,18 @@
 
 {% block head %}
 <title>Meu Perfil</title>
-<script type="text/javascript" src="{% static 'profiles/profiles_my.js'%}"></script>
+<script type="text/javascript" src="{% static 'profiles/get_filtros.js'%}"></script>
 <link rel="stylesheet" href="{% static 'profiles/profiles_my.css' %}">
 {% endblock %}
 
 {% block body %}
 <!-- HEADER -->
+<div id="contaJS"  style="display: none;">{{conta}}</div>
+<div id="dataInicioJS"  style="display: none;">{{dataInicio}}</div>
+<div id="dataFinalJS"  style="display: none;">{{dataFinal}}</div>
+<div id="checkboxJS"  style="display: none;">{{checkbox}}</div>
+<div id="descricaoJS"  style="display: none;">{{descricao}}</div>
+
 <header class="sticky-lg-top">
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -28,10 +34,6 @@
           <li class="nav-item">
             <a href="{% url 'profiles:my-profile-view' %}" class="nav-link">HOME</a>
           </li>
-           
-          <li class="nav-item">
-            <a href="{% url 'profiles:criar-conta' %}" class="nav-link">NOVA CONTA</a>
-          </li>
           <li class="nav-item">
             <a href="{% url 'account_logout' %}"><button class="btn mt-lg-auto mt-2" id="btn-logout">LOGOUT</button></a>
           </li>
@@ -49,20 +51,19 @@
     <div class="row">
       
       <section id="posts" class="col balacobaco">
-        <h2 class="text-center">Contas</h2>
+        <h2 class="text-center">Receitas com Filtro</h2>
 
         <table class="table table-striped">
-
           <thead>
             <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Instituição</th>
-              <th scope="col">Tipo</th>
-              <th scope="col">Saldo</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Criado</th>
+              <th scope="col">Data Pagamento</th>
             </tr>
           </thead>
 
-          <tbody id="contasItems">
+          <tbody id="receitasItems">
             
             <!-- Aqui vai as contas-->
             

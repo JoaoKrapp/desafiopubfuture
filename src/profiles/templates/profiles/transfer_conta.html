@@ -28,10 +28,9 @@
           <li class="nav-item">
             <a href="{% url 'profiles:my-profile-view' %}" class="nav-link">HOME</a>
           </li>
-           
-          <li class="nav-item">
-            <a href="{% url 'profiles:criar-conta' %}" class="nav-link">NOVA CONTA</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link">RANDOM PAGE</a>
+          </li> -->
           <li class="nav-item">
             <a href="{% url 'account_logout' %}"><button class="btn mt-lg-auto mt-2" id="btn-logout">LOGOUT</button></a>
           </li>
@@ -49,29 +48,30 @@
     <div class="row">
       
       <section id="posts" class="col balacobaco">
-        <h2 class="text-center">Contas</h2>
+        <h2 class="text-center">Transferir Dinheiro</h2>
 
-        <table class="table table-striped">
+        <form method="POST">
 
-          <thead>
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Instituição</th>
-              <th scope="col">Tipo</th>
-              <th scope="col">Saldo</th>
-            </tr>
-          </thead>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome da Conta:</label>
+                <input type="text" name="nome" class="form-control" id="nome" >
+            </div>
 
-          <tbody id="contasItems">
-            
-            <!-- Aqui vai as contas-->
-            
-          </tbody>
-        </table>
+            <label class="form-label">Valor:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">R$</span>
+              <input type="text" class="form-control" name="valor" aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">.00</span>
+            </div>
 
-        <div id="postsItems" class="d-flex flex-column">
 
-        </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+        
+
       </section>
 
       

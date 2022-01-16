@@ -28,10 +28,9 @@
           <li class="nav-item">
             <a href="{% url 'profiles:my-profile-view' %}" class="nav-link">HOME</a>
           </li>
-           
-          <li class="nav-item">
-            <a href="{% url 'profiles:criar-conta' %}" class="nav-link">NOVA CONTA</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link">RANDOM PAGE</a>
+          </li> -->
           <li class="nav-item">
             <a href="{% url 'account_logout' %}"><button class="btn mt-lg-auto mt-2" id="btn-logout">LOGOUT</button></a>
           </li>
@@ -49,29 +48,35 @@
     <div class="row">
       
       <section id="posts" class="col balacobaco">
-        <h2 class="text-center">Contas</h2>
+        <h2 class="text-center">Filtrar Receitas</h2>
 
-        <table class="table table-striped">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text">Data ( DD/MM/AA )</span>
+                <input type="text" placeholder="Inicial" name="Inicial" class="form-control">
+                <input type="text" placeholder="Final" name="Final" class="form-control">
+            </div>
 
-          <thead>
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Instituição</th>
-              <th scope="col">Tipo</th>
-              <th scope="col">Saldo</th>
-            </tr>
-          </thead>
+            <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <input class="form-check-input mt-0" type="checkbox" value="True" name="checkbox" aria-label="Checkbox for following text input">
+                </div>
+                <input type="text" placeholder="Filtrar pela descrição" name="filtro" class="form-control">
+            </div>
 
-          <tbody id="contasItems">
+            <div class="form-text input-group-lg">
+                Por favor preencha todos os blocos
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+
             
-            <!-- Aqui vai as contas-->
-            
-          </tbody>
-        </table>
+        </form>
+        
 
-        <div id="postsItems" class="d-flex flex-column">
-
-        </div>
       </section>
 
       

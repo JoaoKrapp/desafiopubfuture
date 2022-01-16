@@ -30,9 +30,15 @@
           <li class="nav-item">
             <a href="{% url 'profiles:my-profile-view' %}" class="nav-link">HOME</a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="#" class="nav-link">RANDOM PAGE</a>
-          </li> -->
+          <li class="nav-item">
+            <a href="{% url 'profiles:edit-conta' conta %}" class="nav-link">EDITAR CONTA</a>
+          </li> 
+          <li class="nav-item">
+            <a href="{% url 'profiles:filtro-conta' conta %}" class="nav-link">FILTRAR</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'profiles:transfer-conta' conta %}" class="nav-link">TRANSFERIR DINHEIRO</a>
+          </li> 
           <li class="nav-item">
             <a href="{% url 'profiles:new-receita' conta %}" class="nav-link">NOVA RECEITA</a>
           </li>
@@ -62,7 +68,6 @@
               <th scope="col">Valor</th>
               <th scope="col">Criado</th>
               <th scope="col">Data Pagamento</th>
-              <th scope="col">Data de Pagamento Esperado</th>
             </tr>
           </thead>
 

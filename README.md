@@ -17,3 +17,8 @@ python manage.py runserver
 ## Analisando o programa:
 O código é formado por 3 diretórios principais: mainpage, profiles, e Pública. O diretório pública possui todos os arquivos necessários usador globalmente, como por exemplo o ```url.py``` que possui todas as urls globais. Dentro da mainpage, profile possuem basicamente:
 - ```Models``` Nesse arquivo aonde sera declarado as tabelas do banco de dados
+- ```Admin``` Nesse arquivo aonde sera declarado as tabelas que serão mostradas no ```/admin/```
+- ```Apps``` Arquivo de configuração de app, assim são chamados as diferentes partes do projeto, no meu caso existem dois mainpage e profiles
+- ```Signals``` Não é um arquivo base django, toda vez que é criado um User na database um signal é ativado para criar um item na tabela Profile com um OneToOneField de um user.
+- ```Urls``` Neste arquivo terá uma lista de cada URL,sendo um Path('url do site', função no arquivo views do mesmo diretorio, name='nome')
+- ```Views``` Aqui tera todas as funções logicas do backend do site

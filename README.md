@@ -25,3 +25,5 @@ O código é formado por 3 diretórios principais: mainpage, profiles, e Públic
 - ```Template``` Neste diretorio tera todos os HTML da página
 ## Admin
 Por padrão o Django possui o /admin
+#### Usuario : ```ADMIN```
+#### Senha : ```admin```

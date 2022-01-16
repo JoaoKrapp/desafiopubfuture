@@ -6,6 +6,7 @@ Opa! Esse aqui é o repositorio para o Programa de Formação da Proway em conju
 Execute:
 ```bash
 pip install -r requirements.TXT
+cd src
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver

@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         url: '/profiles/contas-json',
         success: function(response){
 
-            console.log(response)
           
             const feed = response.contas
 

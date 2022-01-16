@@ -1,9 +1,11 @@
 # Desafio Pub Future
 
 Opa! Esse aqui é o repositório para o Programa de Formação da Proway em conjunto com a Pública Tecnologia, este projeto foi feito em Python(Django), JavaScript(AJAX), HTML, CSS, e Bootstrap. Sendo necessário baixar somente o Python e PIP para a utilização do código. 
-###
--  Só lembrando que quando cadastrar alguma coisa deverá seguir as instruções seguidas, se não o programa irá dar erro e não fazer as operações necessárias.
--  Um amigo tentou rodar um programa e deu um *erro* na criação da receita, e só deu erro na maquina dele outras pessoas rodaram o programa e deu tudo certo, mas não faço ideia como concertar :(
+
+## Defeitos do Código
+-  O codigo dará erro sempre que alguma formatação estiver errada, então por favor fique atento Datas, Numeros formatados do jeito certo
+-  Um amigo tentou rodar um programa e deu um erro na criação da receita, e só deu erro na maquina dele outras pessoas rodaram o programa e deu tudo certo, mas não faço ideia como concertar :(
+-  Quando estava fazendo o codigo estava dando muitos erros com saldo com float, mesmo que eu perca um pouco de pontos neste processo preferi trocar para somente aceitar numeros inteiros
 
 ## Rodando o programa:
 Execute:

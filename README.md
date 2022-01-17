@@ -32,7 +32,7 @@ Por padrão o Django possui o ```/admin```, para editar diretamente o usuário e
 ## APIs
 Existem 3 APIs que são usadas para colocar os dados na tela utilizando JavaScript são elas:
 - ```http://127.0.0.1:8000/profiles/receitas-json/{Conta}``` : Para pegar as receitas de uma expecifica conta
-- ```http://127.0.0.1:8000/profiles/receitas-json/$%7BcontaJS.innerHTML%7D/filtrar/?dataInicio={dataInicio}&dataFinal={dataFinal}&checkbox={checkbox}&descricao=${descricao}``` : Para aplicar os filtros
+- ```http://127.0.0.1:8000/profiles/receitas-json/{Conta}/filtrar/?dataInicio={dataInicio}&dataFinal={dataFinal}&checkbox={checkbox}&descricao=${descricao}``` : Para aplicar os filtros
 - ```/profiles/contas-json``` : Para pegar as contas do seu perfil
 
 
